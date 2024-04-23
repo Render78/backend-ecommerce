@@ -49,4 +49,15 @@ class CartManager {
         }
     }
 
+    async getCartById(id) {
+        try {
+            const cartsArray = await this.readFile();
+            const cart = cartsArray.find(cart => cart.id === id);
+            return cart;
+        } catch (error) {
+            console.error('Error al obtener el carrito por ID: ', error);
+            throw error;
+        }
+    }
+
 }
