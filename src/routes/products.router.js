@@ -67,4 +67,45 @@ router.post("/", async (req, res) => {
     }
 });
 
+router.put("/:pid", async (req, res) => {
+    try {
+        const productId = parseInt(req.params.pid);
+        const productUpdate = req.body;
+
+        const existingProduct = await productManager.getProductById(productId);
+        if (!existingProduct) {
+            return res.status(404).json({ error: "Producto no encontrado" });
+        }
+
+        await productManager.updateProduct(productId, productUpdate);
+
+        const updatedProduct = await productManager.getProductById(productId);
+
+        res.json(updatedProduct);
+    } catch (error) {
+        console.error("Error al actualizar el producto:", error);
+        res.status(500).json({ error: "Ocurrió un error al actualizar el producto" });
+    }
+});
+
+router.delete("/:pid", async (req, res) => {
+    try {
+        const productId = parseInt(req.params.pid);
+
+        // Verificar si el producto existe
+        const existingProduct = await productManager.getProductById(productId);
+        if (!existingProduct) {
+            return res.status(404).json({ error: "Producto no encontrado" });
+        }
+
+        // Eliminar el producto
+        await productManager.deleteProduct(productId);
+
+        res.status(200).json({ message: "El producto fue eliminado exitosamente" });
+    } catch (error) {
+        console.error("Error al eliminar el producto:", error);
+        res.status(500).json({ error: "Ocurrió un error al eliminar el producto" });
+    }
+});
+
 module.exports = router;
