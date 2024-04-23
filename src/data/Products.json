@@ -6,7 +6,8 @@
         "price": 59.99,
         "thumbnail": "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2018/05/red-dead-redemption-2_17.jpg?tf=3840x",
         "code": "RDR201",
-        "stock": 50
+        "stock": 50,
+        "status": true
     },
     {
         "id": 2,
@@ -15,7 +16,8 @@
         "price": 49.99,
         "thumbnail": "https://newesc.com/wp-content/uploads/legend-of-zelda-bow-us.jpg",
         "code": "ZBW402",
-        "stock": 30
+        "stock": 30,
+        "status": true
     },
     {
         "id": 3,
@@ -24,7 +26,8 @@
         "price": 39.99,
         "thumbnail": "https://media.vandal.net/m/1903/20051224193432_1.jpg",
         "code": "SOC012",
-        "stock": 22
+        "stock": 22,
+        "status": true
     },
     {
         "id": 4,
@@ -33,7 +36,8 @@
         "price": 39.99,
         "thumbnail": "https://example.com/cyberpunk_2077.jpg",
         "code": "CPK504",
-        "stock": 20
+        "stock": 20,
+        "status": true
     },
     {
         "id": 5,
@@ -42,7 +46,8 @@
         "price": 49.99,
         "thumbnail": "https://example.com/super_mario_odyssey.jpg",
         "code": "SMO105",
-        "stock": 60
+        "stock": 60,
+        "status": true
     },
     {
         "id": 6,
@@ -51,7 +56,8 @@
         "price": 39.99,
         "thumbnail": "https://example.com/god_of_war.jpg",
         "code": "GOW706",
-        "stock": 25
+        "stock": 25,
+        "status": true
     },
     {
         "id": 7,
@@ -60,7 +66,8 @@
         "price": 29.99,
         "thumbnail": "https://example.com/witcher_3.jpg",
         "code": "TW3WH807",
-        "stock": 35
+        "stock": 35,
+        "status": true
     },
     {
         "id": 8,
@@ -69,7 +76,8 @@
         "price": 29.99,
         "thumbnail": "https://example.com/devil_may_cry_3.jpg",
         "code": "DMC302",
-        "stock": 30
+        "stock": 30,
+        "status": true
     },
     {
         "id": 9,
@@ -78,7 +86,8 @@
         "price": 19.99,
         "thumbnail": "https://example.com/gta_san_andreas.jpg",
         "code": "GTASA404",
-        "stock": 50
+        "stock": 50,
+        "status": true
     },
     {
         "id": 10,
@@ -87,6 +96,7 @@
         "price": 39.99,
         "thumbnail": "https://example.com/uncharted_4.jpg",
         "code": "UC411",
-        "stock": 20
+        "stock": 20,
+        "status": true
     }
 ]
