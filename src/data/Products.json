@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "title": "Red Dead Redemption 2",
+        "description": "Vive la vida de un forajido en el Salvaje Oeste y explora un vasto mundo abierto lleno de peligros y oportunidades.",
+        "price": 59.99,
+        "thumbnail": "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2018/05/red-dead-redemption-2_17.jpg?tf=3840x",
+        "code": "RDR201",
+        "stock": 50
+    },
+    {
+        "id": 2,
+        "title": "The Legend of Zelda: Breath of the Wild",
+        "description": "Embárcate en una aventura épica en el reino de Hyrule y descubre sus misterios mientras luchas contra criaturas malignas.",
+        "price": 49.99,
+        "thumbnail": "https://newesc.com/wp-content/uploads/legend-of-zelda-bow-us.jpg",
+        "code": "ZBW402",
+        "stock": 30
+    },
+    {
+        "id": 3,
+        "title": "Shadow of the Colossus",
+        "description": "Embárcate en una aventura épica enfrentándote a colosos en un vasto mundo lleno de misterios y ruinas antiguas.",
+        "price": 39.99,
+        "thumbnail": "https://media.vandal.net/m/1903/20051224193432_1.jpg",
+        "code": "SOC012",
+        "stock": 22
+    },
+    {
+        "id": 4,
+        "title": "Cyberpunk 2077",
+        "description": "Sumérgete en Night City, una metrópolis futurista llena de crimen, tecnología avanzada y personajes memorables en este RPG de mundo abierto.",
+        "price": 39.99,
+        "thumbnail": "https://example.com/cyberpunk_2077.jpg",
+        "code": "CPK504",
+        "stock": 20
+    },
+    {
+        "id": 5,
+        "title": "Super Mario Odyssey",
+        "description": "Acompaña a Mario en una aventura por todo el mundo para rescatar a la princesa Peach de las garras de Bowser en este colorido juego de plataformas.",
+        "price": 49.99,
+        "thumbnail": "https://example.com/super_mario_odyssey.jpg",
+        "code": "SMO105",
+        "stock": 60
+    },
+    {
+        "id": 6,
+        "title": "God of War",
+        "description": "Únete a Kratos en una emocionante odisea a través de la mitología nórdica mientras lucha contra dioses y monstruos en este juego de acción y aventura.",
+        "price": 39.99,
+        "thumbnail": "https://example.com/god_of_war.jpg",
+        "code": "GOW706",
+        "stock": 25
+    },
+    {
+        "id": 7,
+        "title": "The Witcher 3: Wild Hunt",
+        "description": "Explora un mundo lleno de monstruos, magia y decisiones morales en esta épica aventura de rol basada en las novelas de Andrzej Sapkowski.",
+        "price": 29.99,
+        "thumbnail": "https://example.com/witcher_3.jpg",
+        "code": "TW3WH807",
+        "stock": 35
+    },
+    {
+        "id": 8,
+        "title": "Devil May Cry 3",
+        "description": "Sumérgete en la acción desenfrenada de 'Devil May Cry 3' y controla a Dante, un cazador de demonios con habilidades sobrenaturales.",
+        "price": 29.99,
+        "thumbnail": "https://example.com/devil_may_cry_3.jpg",
+        "code": "DMC302",
+        "stock": 30
+    },
+    {
+        "id": 9,
+        "title": "Grand Theft Auto: San Andreas",
+        "description": "Únete a CJ en su regreso a Los Santos, una ciudad llena de oportunidades y peligros. Explora un vasto mundo abierto y hazte un nombre en la vida criminal.",
+        "price": 19.99,
+        "thumbnail": "https://example.com/gta_san_andreas.jpg",
+        "code": "GTASA404",
+        "stock": 50
+    },
+    {
+        "id": 10,
+        "title": "Uncharted 4: A Thief's End",
+        "description": "Acompaña a Nathan Drake en su última aventura mientras busca tesoros perdidos y enfrenta desafíos mortales en este juego de acción y exploración.",
+        "price": 39.99,
+        "thumbnail": "https://example.com/uncharted_4.jpg",
+        "code": "UC411",
+        "stock": 20
+    }
+]
