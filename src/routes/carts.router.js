@@ -65,10 +65,8 @@ router.post("/:cid/product/:pid", async (req, res) => {
             return res.status(404).json({ error: "Producto no encontrado" });
         }
 
-        // Asegúrate de que el producto se agregue al array de productos del carrito
         cart.products.push({ product: productId, quantity });
 
-        // Guarda el carrito actualizado
         await manager.saveCart(cart);
 
         res.status(201).json({ message: "Producto agregado al carrito exitosamente" });
