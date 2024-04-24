@@ -65,17 +65,11 @@ router.post("/:cid/product/:pid", async (req, res) => {
             return res.status(404).json({ error: "Producto no encontrado" });
         }
 
-        const existingProductIndex = cart.products.findIndex(item => item.product === productId);
+        // Asegúrate de que el producto se agregue al array de productos del carrito
+        cart.products.push({ product: productId, quantity });
 
-        if (existingProductIndex !== -1) {
-            
-            cart.products[existingProductIndex].quantity += quantity;
-        } else {
-            
-            cart.products.push({ product: productId, quantity });
-        }
-
-        await manager.saveCart(cart.products);
+        // Guarda el carrito actualizado
+        await manager.saveCart(cart);
 
         res.status(201).json({ message: "Producto agregado al carrito exitosamente" });
     } catch (error) {
