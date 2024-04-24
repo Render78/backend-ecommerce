@@ -8,8 +8,8 @@ const cartsRouter = require("./routes/carts.router.js");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
-app.use("/", productsRouter);
-app.use("/", cartsRouter);
+app.use("/api/products", productsRouter);
+app.use("/api/carts", cartsRouter);
 
 app.listen(PORT, () => {
     console.log(`Server running on ${PORT}`);
