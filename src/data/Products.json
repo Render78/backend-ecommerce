@@ -1,14 +1,3 @@
 [
-  {
-    "id": 3,
-    "title": "Devil dskakdlsakl",
-    "description": "Un juego de aventuras que sloooooooooooooooooooooooooooooooooooooooooooliXDDDDDDDDDDDDDDDDDDDDDDDDDDDaaaaaaaaaaDDDDDDDDDar a dieciséis gigantes colosales con el fin de revivir a una joven llamada Mono.",
-    "price": 39.99,
-    "thumbnail": [
-      "https://example.com/shadow_of_the_colossus_1.jpg",
-      "https://example.com/shadow_of_the_colossus_2.jpg"
-    ],
-    "code": "SOTC0423",
-    "stock": 25
-  }
+  
 ]
