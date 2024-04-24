@@ -1,3 +1,13 @@
 [
-  
+    {
+        "id": 1,
+        "title": "Producto 1",
+        "description": "Descripción del producto 1",
+        "price": 10.99,
+        "thumbnail": [
+            "https://ejemplo.com/thumbnail1.jpg"
+        ],
+        "code": "PROD44343",
+        "stock": 50
+    }
 ]
