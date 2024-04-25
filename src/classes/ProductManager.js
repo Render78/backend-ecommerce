@@ -44,7 +44,8 @@ class ProductManager {
             price,
             thumbnail,
             code,
-            stock
+            stock,
+            status: true
         };
 
         this.products.push(product);
