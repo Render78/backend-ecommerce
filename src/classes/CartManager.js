@@ -9,33 +9,33 @@ class CartManager {
 
     async saveCart(arrayCarts) {
         try {
-            await fs.writeFile(this.path, JSON.stringify(arrayCarts, null, 2))
+            await fs.writeFile(this.path, JSON.stringify(arrayCarts, null, 2));
         } catch (error) {
-            console.log('Error al guardar el archivo: ', error)
+            console.log('Error al guardar el archivo: ', error);
         }
     }
 
     async readFile() {
         try {
             const read = await fs.readFile(this.path, 'utf-8');
+            if (!read) {
+                return [];
+            }
             const cartsArray = JSON.parse(read);
             return cartsArray;
         } catch (error) {
             console.log('Error al leer el archivo: ', error);
+            return [];
         }
     }
 
     async addCart(newCart) {
         try {
-            const { products } = newCart;
-
             const existingCarts = await this.readFile();
-            const maxId = existingCarts.reduce((max, cart) => (cart.id > max ? cart.id : max), 0);
-            const newId = maxId + 1;
 
             const cart = {
-                id: newId,
-                products: products || []
+                id: existingCarts.length + 1,
+                products: []
             };
 
             existingCarts.push(cart);
