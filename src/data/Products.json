@@ -1,13 +1,38 @@
 [
-    {
-        "id": 1,
-        "title": "Producto 1",
-        "description": "Descripción del producto 1",
-        "price": 10.99,
-        "thumbnail": [
-            "https://ejemplo.com/thumbnail1.jpg"
-        ],
-        "code": "PROD44343",
-        "stock": 50
-    }
+  {
+    "id": 1,
+    "title": "Smartwatch Xiaomi Mi Band 6",
+    "description": "Smartwatch con pantalla a color, monitorización de actividad física y notificaciones inteligentes.",
+    "price": 49.99,
+    "thumbnail": [
+      "https://example.com/xiaomi-mi-band-6-thumbnail.jpg"
+    ],
+    "code": "XIA-MB6-001",
+    "stock": 50,
+    "status": true
+  },
+  {
+    "id": 2,
+    "title": "Cámara DSLR Canon EOS Rebel T7i",
+    "description": "Cámara réflex digital con sensor CMOS de 24.2 MP y pantalla táctil de ángulo variable.",
+    "price": 699.99,
+    "thumbnail": [
+      "https://example.com/canon-eos-t7i-thumbnail.jpg"
+    ],
+    "code": "CAN-EOS-T7i-001",
+    "stock": 15,
+    "status": true
+  },
+  {
+    "id": 3,
+    "title": "Mouse inalámbrico Logitech MX Master 3",
+    "description": "Mouse ergonómico con conexión inalámbrica Bluetooth y USB-C, ideal para productividad.",
+    "price": 99.99,
+    "thumbnail": [
+      "https://example.com/logitech-mx-master-3-thumbnail.jpg"
+    ],
+    "code": "LOG-MX3-001",
+    "stock": 25,
+    "status": true
+  }
 ]
