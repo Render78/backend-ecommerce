@@ -48,19 +48,16 @@ router.post("/:cid/product/:pid", async (req, res) => {
         if (!cart) {
             return res.status(404).json({ error: "Carrito no encontrado" });
         }
-
-        // Verificar si el producto ya está en el carrito
+        
         const existingProductIndex = cart.products.findIndex(item => item.product === productId);
 
-        if (existingProductIndex !== -1) {
-            // Si el producto ya existe, incrementar la cantidad
+        if (existingProductIndex !== -1) {            
             cart.products[existingProductIndex].quantity += quantity;
-        } else {
-            // Si el producto no existe, agregarlo al carrito
+        } else {            
             cart.products.push({ product: productId, quantity });
         }
 
-        await manager.saveCart([cart]); // Guardar el carrito modificado como un array con un solo elemento
+        await manager.saveCart([cart]); 
 
         res.status(201).json({ message: "Producto agregado al carrito exitosamente" });
     } catch (error) {
