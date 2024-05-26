@@ -37,8 +37,8 @@ mongoose.connect("mongodb+srv://Julian:12345@cluster0.e9to8uh.mongodb.net/ecomme
     .then(() => { console.log("Conectado a la base de datos") })
     .catch(error => { console.error("Error en la conexion", error) });
 
-app.engine('handlebars', handlebars.engine()) //Inicializacion del motor de plantilla
-app.set('views', __dirname + '/views') //Indicar en que parte están las vistas
+app.engine('handlebars', handlebars.engine())
+app.set('views', __dirname + '/views')
 app.set('view engine', 'handlebars')
 app.use(express.static(__dirname + '/public'))
 
