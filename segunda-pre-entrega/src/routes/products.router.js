@@ -53,14 +53,16 @@ router.post("/", async (req, res) => {
     try {
         let { title, description, category, price, thumbnail, code, stock, status } = req.body;
         if (!title || !description || !category || !price || !thumbnail || !code || !stock || !status) {
-            res.send({ status: "error", error: "Algunos parametros estan vacios" });
+            return res.status(400).send({ status: "error", error: "Algunos parámetros están vacíos" });
         }
+
         let result = await productsModel.create({ title, description, category, price, thumbnail, code, stock, status });
-        res.send({ result: "success", payload: result });
+        res.render('addProductSuccess', { product: result.toObject() });
     } catch (error) {
         console.error("No se pudo agregar el producto", error);
+        res.status(500).send({ status: "error", error: "Error interno del servidor" });
     }
-})
+});
 
 router.put("/:pid", async (req, res) => {
     let { pid } = req.params;
