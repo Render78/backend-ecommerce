@@ -6,7 +6,7 @@ const router = Router();
 router.get("/", async (req, res) => {
     try {
         let products = await productsModel.find().lean();
-        res.render('home', { products });
+        res.render('products', { products });
     } catch (error) {
         console.error("No se pudieron obtener los productos", error);
     }
