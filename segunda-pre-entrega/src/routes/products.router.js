@@ -1,9 +1,10 @@
 import { Router } from "express";
 import productsModel from "../dao/models/products.model.js";
+import mongoose from "mongoose";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/get", async (req, res) => {
     try {
         let products = await productsModel.find().lean();
         res.render('products', { products });
@@ -11,6 +12,34 @@ router.get("/", async (req, res) => {
         console.error("No se pudieron obtener los productos", error);
     }
 })
+
+router.get("/get/:pid", async (req, res) => {
+    try {
+        const pId = req.params.pid;
+
+        if (!mongoose.Types.ObjectId.isValid(pId)) {
+            return res.status(400).send({ status: "error", error: "ID inválido" });
+        }
+
+        const objectId = new mongoose.Types.ObjectId(pId);
+        const product = await productsModel.findById(objectId);
+
+        if (!product) {
+            return res.status(404).send({ status: "error", error: "Producto no encontrado" });
+        }
+
+        res.render('getById', {
+            title: product.title,
+            description: product.description,
+            category: product.category,
+            price: product.price,
+            thumbnail: product.thumbnail
+        });
+    } catch (error) {
+        console.error("No se pudo obtener el producto por ID", error);
+        res.status(500).send({ status: "error", error: "Error interno del servidor" });
+    }
+});
 
 router.get("/post", async (req, res) => {
     try {

@@ -1,21 +1,21 @@
 /*
     /api/products/
     GET, traer todos los productos
-    GET/:pid traer producto con el id especificado
+    TODO GET/:pid traer producto con el id especificado
 
     POST, insertar un nuevo producto (title, description, code, price(number), status(bool - true por defecto), stock, category, thumbnail)
 
-    PUT/:pid, actualizar el producto por los campos enviados desde el body con el id especificado
+    TODO PUT/:pid, actualizar el producto por los campos enviados desde el body con el id especificado
 
-    DELETE/:pid, eliminar el producto con el id especificado
+    TODO DELETE/:pid, eliminar el producto con el id especificado
 
 
     /api/carts
-    POST, crear nuevo carrito (products(array que contendrá productos))
+    TODO POST, crear nuevo carrito (products(array que contendrá productos))
 
-    GET/:cid, traer los productos que pertenezcan al carrito con el id especificado
+    TODO GET/:cid, traer los productos que pertenezcan al carrito con el id especificado
 
-    POST/:cid/product/:pid, agregar el producto con el id especificado al array products del carrito (product: id, quantity: contener la cantidad de dicho producto)
+    TODO POST/:cid/product/:pid, agregar el producto con el id especificado al array products del carrito (product: id, quantity: contener la cantidad de dicho producto)
 
 */
 
