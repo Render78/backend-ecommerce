@@ -28,7 +28,7 @@ router.get("/get/:pid", async (req, res) => {
             return res.status(404).send({ status: "error", error: "Producto no encontrado" });
         }
 
-        res.render('getById', {
+        res.render('getProductById', {
             title: product.title,
             description: product.description,
             category: product.category,
