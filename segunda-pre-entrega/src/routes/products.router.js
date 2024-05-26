@@ -69,7 +69,7 @@ router.put("/:pid", async (req, res) => {
 
     let productToReplace = req.body;
 
-    if (!productToReplace.title || !productToReplace.description || !productToReplace.price || !productToReplace.thumbnail || !productToReplace.code || !productToReplace.stock || !productToReplace.status) {
+    if (!productToReplace.title || !productToReplace.description || !productToReplace.category || !productToReplace.price || !productToReplace.thumbnail || !productToReplace.code || !productToReplace.stock || !productToReplace.status) {
         res.send({ status: "error", error: "Algunos parametros estan vacios" });
     }
 
