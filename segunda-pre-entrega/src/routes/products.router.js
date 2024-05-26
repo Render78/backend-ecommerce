@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 
 router.get("/post", async (req, res) => {
     try {
-        res.render('postProduct');
+        res.render('addProduct');
     } catch (error) {
         console.error("No se pudo renderizar la vista", error);
     }
@@ -22,11 +22,11 @@ router.get("/post", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        let { title, description, price, thumbnail, code, stock, status } = req.body;
-        if (!title || !description || !price || !thumbnail || !code || !stock || !status) {
+        let { title, description, category, price, thumbnail, code, stock, status } = req.body;
+        if (!title || !description || !category || !price || !thumbnail || !code || !stock || !status) {
             res.send({ status: "error", error: "Algunos parametros estan vacios" });
         }
-        let result = await productsModel.create({ title, description, price, thumbnail, code, stock, status });
+        let result = await productsModel.create({ title, description, category, price, thumbnail, code, stock, status });
         res.send({ result: "success", payload: result });
     } catch (error) {
         console.error("No se pudo agregar el producto", error);

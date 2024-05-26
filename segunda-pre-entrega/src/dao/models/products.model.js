@@ -4,7 +4,7 @@ const productsCollection = "Products";
 
 const productsSchema = new mongoose.Schema({
     title: { type: String, required: true, max: 100 },
-    description: { type: String, required: true, max: 100 },
+    description: { type: String, required: true, max: 500 },
     category: {type: String, required: true, max: 20},
     price: { type: Number, required: true, min: 1 },
     thumbnail: { type: String, required: true },
