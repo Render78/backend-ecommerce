@@ -1,7 +1,7 @@
 /*
     /api/products/
     GET, traer todos los productos
-    TODO GET/:pid traer producto con el id especificado
+    GET/:pid traer producto con el id especificado
 
     POST, insertar un nuevo producto (title, description, code, price(number), status(bool - true por defecto), stock, category, thumbnail)
 
