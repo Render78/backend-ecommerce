@@ -1,0 +1,20 @@
+<div class="container mt-5">
+    <h1 class="mb-4">Lista de Productos</h1>
+    <div class="row d-flex">
+        {{#each products}}
+        <div class="col-md-4 mb-4 d-flex align-items-stretch">
+            <div class="card h-100">
+                <div class="card-img-wrapper">
+                    <img src="{{thumbnail}}" class="card-img-top" alt="{{title}}">
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{title}}</h5>
+                    <p class="card-text">{{description}}</p>
+                    <p class="card-text mt-auto"><strong>Precio: </strong>${{price}}</p>
+                    <a href="#" class="btn btn-primary mt-auto">Comprar</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
