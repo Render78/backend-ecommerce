@@ -23,6 +23,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import handlebars from 'express-handlebars'
 import __dirname from './utils.js';
+import indexRouter from './routes/index.router.js'
 import productsRouter from './routes/products.router.js'
 // import chatRouter from './routes/chat.router.js'
 
@@ -41,6 +42,7 @@ app.set('views', __dirname + '/views') //Indicar en que parte están las vistas
 app.set('view engine', 'handlebars')
 app.use(express.static(__dirname + '/public'))
 
+app.use('/', indexRouter);
 app.use('/api/products', productsRouter)
 // app.use('/api/chat', chatRouter)
 
