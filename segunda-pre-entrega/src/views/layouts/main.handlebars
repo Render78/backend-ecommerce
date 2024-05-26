@@ -27,8 +27,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/api/products/get">Ver productos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/api/products/post">Insertar producto</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="productDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Modificar productos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="productDropdown">
+                            <li><a class="dropdown-item" href="/api/products/post">Insertar producto</a></li>
+                            <li><a class="dropdown-item" href="/api/products/put">Actualizar producto</a></li>
+                            <li><a class="dropdown-item" href="/api/products/delete">Borrar producto</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/api/chat">Chat</a>
