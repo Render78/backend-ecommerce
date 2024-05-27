@@ -9,33 +9,53 @@ const router = Router();
 router.get("/get", async (req, res) => {
     try {
         let { limit, page, sort, query } = req.query;
-        limit = parseInt(limit) || 10;
-        page = parseInt(page) || 1;
-        sort = sort || '';
-        query = query || '';
+        limit = parseInt(limit) || 10; // Default limit to 10 if not provided
+        page = parseInt(page) || 1; // Default page to 1 if not provided
+        sort = sort || ''; // Default to empty string if not provided
+        query = query || ''; // Default query to empty string if not provided
 
-        const skip = (page - 1) * limit;
-
-        let productsQuery = productsModel.find();
+        let filter = {};
 
         if (query) {
+            // Si se proporciona query, se filtra por categoría usando una expresión regular insensible a mayúsculas y minúsculas
             const categoryRegex = new RegExp(`^${query}$`, 'i');
-            productsQuery = productsQuery.where('category').regex(categoryRegex);
-            console.log(`Buscando productos con la categoria: ${query}`);
+            filter = { category: categoryRegex };
         }
 
-        if (sort && ['asc', 'desc'].includes(sort)) {
-            productsQuery = productsQuery.sort({ price: sort === 'asc' ? 1 : -1 });
-        }
+        let options = {
+            page: page,
+            limit: limit,
+            sort: sort ? { price: sort === 'asc' ? 1 : -1 } : {},
+            lean: true
+        };
 
-        productsQuery = productsQuery.skip(skip).limit(limit);
+        let result = await productsModel.paginate(filter, options);
 
-        let products = await productsQuery.lean();
-        console.log(`Productos encontrados: ${JSON.stringify(products, null, 2)}`);
-        res.render('products', { products });
+        const { totalPages, prevPage, nextPage, page: currentPage, hasPrevPage, hasNextPage } = result;
+        const prevLink = hasPrevPage ? `${req.baseUrl}?limit=${limit}&page=${prevPage}&sort=${sort}&query=${query}` : null;
+        const nextLink = hasNextPage ? `${req.baseUrl}?limit=${limit}&page=${nextPage}&sort=${sort}&query=${query}` : null;
+
+        // Simplificar la impresión de la información de paginación en la consola
+        console.log(`
+        Paginación:
+        Total Pages: ${totalPages}
+        Prev Page: ${prevPage}
+        Next Page: ${nextPage}
+        Current Page: ${currentPage}
+        Has Prev Page: ${hasPrevPage}
+        Has Next Page: ${hasNextPage}
+        Prev Link: ${prevLink}
+        Next Link: ${nextLink}
+        `);
+
+        // Renderizar la vista Handlebars
+        res.render('products', { products: result.docs });
     } catch (error) {
         console.error("No se pudieron obtener los productos", error);
-        res.status(500).send("No se pudieron obtener los productos");
+        res.status(500).json({
+            status: 'error',
+            message: "No se pudieron obtener los productos"
+        });
     }
 });
 
