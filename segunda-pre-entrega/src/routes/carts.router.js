@@ -91,7 +91,7 @@ router.delete('/delete/:cid/products/:pid', async (req, res) => {
     }
 });
 
-
+//TODO endpoint api/cart/:cid
 
 router.put('/put/:cid/products/:pid', async (req, res) => {
     try {
@@ -123,5 +123,24 @@ router.put('/put/:cid/products/:pid', async (req, res) => {
     }
 });
 
+router.delete('/delete/:cid', async (req, res) => {
+    try {
+        const { cid } = req.params;
+
+        const cart = await cartModel.findById(cid);
+        if (!cart) {
+            return res.status(404).json({ error: 'Carrito no encontrado' });
+        }
+
+        cart.products = [];
+
+        await cart.save();
+
+        return res.status(200).json({ message: 'Todos los productos del carrito han sido eliminados' });
+    } catch (error) {
+        console.error('Error al eliminar todos los productos del carrito:', error);
+        return res.status(500).json({ error: 'Error al eliminar todos los productos del carrito' });
+    }
+});
 
 export default router;
