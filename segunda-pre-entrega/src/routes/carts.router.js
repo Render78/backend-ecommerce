@@ -1,5 +1,6 @@
 import { Router } from "express"
 import cartModel from "../dao/models/cart.model.js"
+import productsModel from "../dao/models/products.model.js";
 import mongoose from "mongoose";
 
 const router = Router();
@@ -17,11 +18,15 @@ router.post('/post', async (req, res) => {
     }
 });
 
-router.get('/:cid', async (req, res) => {
+router.get('/get/:cid', async (req, res) => {
     try {
         const cartId = req.params.cid;
 
-        const cart = await Cart.findById(cartId).populate('products.product', 'name price');
+        const cart = await cartModel.findById(cartId).populate({
+            path: 'products.product',
+            select: 'title price',
+            model: productsModel
+        });
 
         if (!cart) {
             return res.status(404).json({ error: 'Carrito no encontrado' });
