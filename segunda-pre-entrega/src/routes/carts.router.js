@@ -39,4 +39,32 @@ router.get('/get/:cid', async (req, res) => {
     }
 });
 
+router.post('/post/:cid/product/:pid', async (req, res) => {
+    try {
+        const { cid, pid } = req.params;
+
+        const cart = await cartModel.findById(cid);
+        if (!cart) {
+            return res.status(404).json({ error: 'Carrito no encontrado' });
+        }
+
+        const existingProductIndex = cart.products.findIndex(item => item.product.toString() === pid);
+        if (existingProductIndex !== -1) {
+
+            cart.products[existingProductIndex].quantity += 1;
+        } else {
+
+            cart.products.push({ product: pid, quantity: 1 });
+        }
+
+        await cart.save();
+
+        return res.status(200).json(cart);
+    } catch (error) {
+        console.error('Error al agregar el producto al carrito:', error);
+        return res.status(500).json({ error: 'Error al agregar el producto al carrito' });
+    }
+});
+
+
 export default router;

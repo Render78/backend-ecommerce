@@ -15,7 +15,7 @@
 
     GET/:cid, traer los productos que pertenezcan al carrito con el id especificado
 
-    TODO POST/:cid/product/:pid, agregar el producto con el id especificado al array products del carrito (product: id, quantity: contener la cantidad de dicho producto)
+    POST/:cid/product/:pid, agregar el producto con el id especificado al array products del carrito (product: id, quantity: contener la cantidad de dicho producto)
 
 */
 
