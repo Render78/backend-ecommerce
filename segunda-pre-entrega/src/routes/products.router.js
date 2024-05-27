@@ -8,12 +8,36 @@ const router = Router();
 
 router.get("/get", async (req, res) => {
     try {
-        let products = await productsModel.find().lean();
+        let { limit, page, sort, query } = req.query;
+        limit = parseInt(limit) || 10;
+        page = parseInt(page) || 1;
+        sort = sort || '';
+        query = query || '';
+
+        const skip = (page - 1) * limit;
+
+        let productsQuery = productsModel.find();
+
+        if (query) {
+            const categoryRegex = new RegExp(`^${query}$`, 'i');
+            productsQuery = productsQuery.where('category').regex(categoryRegex);
+            console.log(`Buscando productos con la categoria: ${query}`);
+        }
+
+        if (sort && ['asc', 'desc'].includes(sort)) {
+            productsQuery = productsQuery.sort({ price: sort === 'asc' ? 1 : -1 });
+        }
+
+        productsQuery = productsQuery.skip(skip).limit(limit);
+
+        let products = await productsQuery.lean();
+        console.log(`Productos encontrados: ${JSON.stringify(products, null, 2)}`);
         res.render('products', { products });
     } catch (error) {
         console.error("No se pudieron obtener los productos", error);
+        res.status(500).send("No se pudieron obtener los productos");
     }
-})
+});
 
 router.get("/get/:pid", async (req, res) => {
     try {
