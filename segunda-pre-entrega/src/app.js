@@ -11,7 +11,7 @@
 
 
     /api/carts
-    TODO POST, crear nuevo carrito (products(array que contendrá productos))
+    POST, crear nuevo carrito (products(array que contendrá productos))
 
     TODO GET/:cid, traer los productos que pertenezcan al carrito con el id especificado
 
@@ -25,6 +25,7 @@ import handlebars from 'express-handlebars'
 import __dirname from './utils.js';
 import indexRouter from './routes/index.router.js'
 import productsRouter from './routes/products.router.js'
+import cartsRouter from './routes/carts.router.js'
 // import chatRouter from './routes/chat.router.js'
 
 const app = express();
@@ -44,6 +45,7 @@ app.use(express.static(__dirname + '/public'))
 
 app.use('/', indexRouter);
 app.use('/api/products', productsRouter)
+app.use('/api/carts', cartsRouter)
 // app.use('/api/chat', chatRouter)
 
 app.listen(PORT, () => {
