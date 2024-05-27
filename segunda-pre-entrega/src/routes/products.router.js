@@ -78,19 +78,25 @@ router.get("/put", async (req, res) => {
     }
 });
 
-router.put("/:pid", async (req, res) => {
+router.put("/put/:pid", async (req, res) => {
     let { pid } = req.params;
-
     let productToReplace = req.body;
 
     if (!productToReplace.title || !productToReplace.description || !productToReplace.category || !productToReplace.price || !productToReplace.thumbnail || !productToReplace.code || !productToReplace.stock || !productToReplace.status) {
-        res.send({ status: "error", error: "Algunos parametros estan vacios" });
+        return res.status(400).json({ status: "error", error: "Algunos parametros estan vacios" });
     }
 
-    let result = await productsModel.updateOne({ _id: pid }, productToReplace);
-
-    res.send({ result: "success", payload: result });
-})
+    try {
+        let result = await productsModel.updateOne({ _id: pid }, productToReplace);
+        if (result.nModified === 0) {
+            return res.status(404).json({ status: "error", error: "Producto no encontrado" });
+        }
+        res.json({ status: "success", payload: result });
+    } catch (error) {
+        console.error("Error actualizando el producto:", error);
+        res.status(500).json({ status: "error", error: "Error interno del servidor" });
+    }
+});
 
 //!ENDPOINTS DELETE
 router.get("/delete", async (req, res) => {
