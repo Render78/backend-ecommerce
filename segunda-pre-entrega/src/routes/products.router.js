@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 
 const router = Router();
 
+//! ENDPOINTS GET
+
 router.get("/get", async (req, res) => {
     try {
         let products = await productsModel.find().lean();
@@ -41,6 +43,8 @@ router.get("/get/:pid", async (req, res) => {
     }
 });
 
+//! ENDPOINTS POST
+
 router.get("/post", async (req, res) => {
     try {
         res.render('addProduct');
@@ -64,6 +68,16 @@ router.post("/", async (req, res) => {
     }
 });
 
+
+//! ENDPOINTS PUT
+router.get("/put", async (req, res) => {
+    try {
+        res.render('updateProduct');
+    } catch (error) {
+        console.error("No se pudo renderizar la vista", error);
+    }
+});
+
 router.put("/:pid", async (req, res) => {
     let { pid } = req.params;
 
@@ -76,6 +90,15 @@ router.put("/:pid", async (req, res) => {
     let result = await productsModel.updateOne({ _id: pid }, productToReplace);
 
     res.send({ result: "success", payload: result });
+})
+
+//!ENDPOINTS DELETE
+router.get("/delete", async (req, res) => {
+    try {
+        res.render('deleteProduct');
+    } catch (error) {
+        console.error("No se pudo renderizar la vista", error);
+    }
 })
 
 router.delete("/:pid", async (req, res) => {
