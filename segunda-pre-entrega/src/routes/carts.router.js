@@ -24,7 +24,7 @@ router.get('/get/:cid', async (req, res) => {
 
         const cart = await cartModel.findById(cartId).populate({
             path: 'products.product',
-            select: 'title price',
+            select: 'title description category price code stock status',
             model: productsModel
         });
 
