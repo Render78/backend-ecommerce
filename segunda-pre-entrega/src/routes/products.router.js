@@ -9,15 +9,14 @@ const router = Router();
 router.get("/get", async (req, res) => {
     try {
         let { limit, page, sort, query } = req.query;
-        limit = parseInt(limit) || 10; // Default limit to 10 if not provided
-        page = parseInt(page) || 1; // Default page to 1 if not provided
-        sort = sort || ''; // Default to empty string if not provided
-        query = query || ''; // Default query to empty string if not provided
+        limit = parseInt(limit) || 10;
+        page = parseInt(page) || 1;
+        sort = sort || '';
+        query = query || '';
 
         let filter = {};
 
         if (query) {
-            // Si se proporciona query, se filtra por categoría usando una expresión regular insensible a mayúsculas y minúsculas
             const categoryRegex = new RegExp(`^${query}$`, 'i');
             filter = { category: categoryRegex };
         }
@@ -35,7 +34,6 @@ router.get("/get", async (req, res) => {
         const prevLink = hasPrevPage ? `${req.baseUrl}?limit=${limit}&page=${prevPage}&sort=${sort}&query=${query}` : null;
         const nextLink = hasNextPage ? `${req.baseUrl}?limit=${limit}&page=${nextPage}&sort=${sort}&query=${query}` : null;
 
-        // Simplificar la impresión de la información de paginación en la consola
         console.log(`
         Paginación:
         Total Pages: ${totalPages}
@@ -48,7 +46,6 @@ router.get("/get", async (req, res) => {
         Next Link: ${nextLink}
         `);
 
-        // Renderizar la vista Handlebars
         res.render('products', { products: result.docs });
     } catch (error) {
         console.error("No se pudieron obtener los productos", error);
