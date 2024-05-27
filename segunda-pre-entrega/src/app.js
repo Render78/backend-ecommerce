@@ -5,9 +5,9 @@
 
     POST, insertar un nuevo producto (title, description, code, price(number), status(bool - true por defecto), stock, category, thumbnail)
 
-    TODO PUT/:pid, actualizar el producto por los campos enviados desde el body con el id especificado
+    PUT/:pid, actualizar el producto por los campos enviados desde el body con el id especificado
 
-    TODO DELETE/:pid, eliminar el producto con el id especificado
+    DELETE/:pid, eliminar el producto con el id especificado
 
 
     /api/carts
