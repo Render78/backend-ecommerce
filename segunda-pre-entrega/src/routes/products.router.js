@@ -107,7 +107,7 @@ router.get("/delete", async (req, res) => {
     }
 })
 
-router.delete("/:pid", async (req, res) => {
+router.delete("/delete/:pid", async (req, res) => {
     let { pid } = req.params;
     let result = await productsModel.deleteOne({ _id: pid });
     res.send({ result: "success", payload: result });
