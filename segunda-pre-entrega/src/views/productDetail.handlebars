@@ -10,9 +10,14 @@
                     <p class="card-text"><strong>Precio:</strong> ${{price}}</p>
                     <p class="card-text"><strong>ID:</strong> {{id}}</p>
                     <p class="card-text"><strong>Stock:</strong> {{stock}}</p>
-                    <a href="/api/products/get" class="btn btn-primary">Volver atrás</a>
+                    <div class="d-grid gap-2 d-md-block">
+                        <a href="/api/products/get" class="btn btn-primary w-100 mb-2">Volver atrás</a>
+                        <button class="btn btn-success w-100" onclick="addToCart('{{id}}')">Agregar al carrito</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script src="/js/addToCart.js"></script>
