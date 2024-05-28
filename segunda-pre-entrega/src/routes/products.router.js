@@ -31,8 +31,8 @@ router.get("/get", async (req, res) => {
         let result = await productsModel.paginate(filter, options);
 
         const { totalPages, prevPage, nextPage, page: currentPage, hasPrevPage, hasNextPage } = result;
-        const prevLink = hasPrevPage ? `${req.baseUrl}?limit=${limit}&page=${prevPage}&sort=${sort}&query=${query}` : null;
-        const nextLink = hasNextPage ? `${req.baseUrl}?limit=${limit}&page=${nextPage}&sort=${sort}&query=${query}` : null;
+        const prevLink = hasPrevPage ? `${req.baseUrl}/get?limit=${limit}&page=${prevPage}&sort=${sort}&query=${query}` : null;
+        const nextLink = hasNextPage ? `${req.baseUrl}/get?limit=${limit}&page=${nextPage}&sort=${sort}&query=${query}` : null;
 
         console.log(`
         Paginación:
@@ -46,7 +46,7 @@ router.get("/get", async (req, res) => {
         Next Link: ${nextLink}
         `);
 
-        res.render('products', { products: result.docs });
+        res.render('products', { products: result.docs, prevLink: prevLink, nextLink, nextLink });
     } catch (error) {
         console.error("No se pudieron obtener los productos", error);
         res.status(500).json({
