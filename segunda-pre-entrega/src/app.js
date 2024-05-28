@@ -14,8 +14,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 dotenv.config();
-console.log(process.env);
-console.log(process.env.MONGO_URL);
 mongoose.connect(process.env.MONGO_URL)
     .then(() => { console.log("Conectado a la base de datos") })
     .catch(error => console.error("Error en la conexion", error))
