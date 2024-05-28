@@ -91,8 +91,6 @@ router.delete('/delete/:cid/products/:pid', async (req, res) => {
     }
 });
 
-//TODO endpoint api/cart/:cid
-
 router.put('/put/:cid/products/:pid', async (req, res) => {
     try {
         const { cid, pid } = req.params;
