@@ -12,7 +12,8 @@
                     <h5 class="card-subtitle">{{category}}</h3>
                     <p class="card-text">{{description}}</p>
                     <p class="card-text mt-auto"><strong>Precio: </strong>${{price}}</p>
-                    <a href="#" class="btn btn-primary mt-auto">Comprar</a>
+                    <a href="/api/products/get/{{_id}}" class="btn btn-primary mt-auto">Ver más</a>
+                    <button class="btn btn-success mt-2" onclick="agregarAlCarrito('{{id}}')">Agregar al carrito</button>
                 </div>
             </div>
         </div>

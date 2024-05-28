@@ -71,12 +71,15 @@ router.get("/get/:pid", async (req, res) => {
             return res.status(404).send({ status: "error", error: "Producto no encontrado" });
         }
 
-        res.render('getProductById', {
+        res.render('productDetail', {
+            id: product._id,
             title: product.title,
             description: product.description,
             category: product.category,
             price: product.price,
-            thumbnail: product.thumbnail
+            thumbnail: product.thumbnail,
+            code: product.code,
+            stock: product.stock
         });
     } catch (error) {
         console.error("No se pudo obtener el producto por ID", error);
