@@ -1,0 +1,49 @@
+<div class="container mt-5">
+    <h1 class="mb-4">Agregar nuevo producto</h1>
+    <form method="POST" action="/api/products">
+        <div class="form-group">
+            <label for="title">Título del Producto</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Descripción</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="category">Categoría</label>
+            <select class="form-control" id="category" name="category" required>
+                <option value="" selected disabled>Seleccione una categoría</option>
+                <option value="Computadoras">Computadoras</option>
+                <option value="Telefonos">Telefonos</option>
+                <option value="Televisores">Televisores</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="Consolas">Consolas</option>
+                <option value="Videojuegos">Videojuegos</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Precio</label>
+            <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="thumbnail">URL de la Imagen (Thumbnail)</label>
+            <input type="url" class="form-control" id="thumbnail" name="thumbnail" required>
+        </div>
+        <div class="form-group">
+            <label for="code">Código del Producto</label>
+            <input type="text" class="form-control" id="code" name="code" required>
+        </div>
+        <div class="form-group">
+            <label for="stock">Stock</label>
+            <input type="number" class="form-control" id="stock" name="stock" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Estado</label>
+            <select class="form-control" id="status" name="status" required>
+                <option value="true">Activo</option>
+                <option value="false">Inactivo</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Agregar Producto</button>
+    </form>
+</div>

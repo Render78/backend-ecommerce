@@ -1,0 +1,12 @@
+<div class="container mt-5">
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">¡Producto agregado con éxito!</h4>
+        <p>ID del Producto: {{product._id}}</p>
+        <hr>
+        <p class="mb-0"><strong>Título del Producto:</strong> {{product.title}}</p>
+        <p><strong>Categoría:</strong> {{product.category}}</p>
+        <p><strong>Precio:</strong> ${{product.price}}</p>
+        <p><strong>Código del Producto:</strong> {{product.code}}</p>
+        <a href="/api/products/get" class="btn btn-primary mt-3">Ver todos los productos</a>
+    </div>
+</div>
