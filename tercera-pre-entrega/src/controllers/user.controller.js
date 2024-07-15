@@ -1,36 +1,36 @@
-import userModel from '../dao/models/user.model.js';
+import UserRepositoryImpl from '../repositories/user.repository.impl.js';
 import { createHash } from '../utils.js';
-import Cart from '../dao/classes/cart.dao.js'
+import CartRepositoryImpl from '../repositories/cart.repository.impl.js';
 
-const cartService = new Cart()
+const userRepository = new UserRepositoryImpl();
+const cartRepository = new CartRepositoryImpl();
 
 export const registerUser = async (req, res) => {
     const { first_name, last_name, email, age, password } = req.body;
 
-    try {        
-        const existingUser = await userModel.findOne({ email });
+    try {
+        const existingUser = await userRepository.findUserByEmail(email);
         if (existingUser) {
             return res.status(400).json({ error: 'El correo ya está registrado' });
         }
-        
+
         const hashedPassword = createHash(password);
-        
-        const newUser = new userModel({
+
+        const newUser = {
             first_name,
             last_name,
             email,
             age,
             password: hashedPassword
-        });
-        
-        const savedUser = await newUser.save();
+        };
+
+        const savedUser = await userRepository.createUser(newUser);
         console.log("Nuevo usuario registrado:", savedUser);
-        
-        const newCart = await cartService.createCart();
-        
+
+        const newCart = await cartRepository.createCart();
         savedUser.cart = newCart._id;
-        await savedUser.save();
-        
+        await userRepository.updateUser(savedUser);
+
         res.status(201).json({ status: "success", message: "Usuario registrado exitosamente" });
     } catch (error) {
         console.error("Error al registrar usuario:", error);
