@@ -1,4 +1,5 @@
 import axios from 'axios'
+import UserDTO from '../dao/dtos/user.dto.js';
 
 export const renderHome = async (req, res) => {
     try {
@@ -9,11 +10,11 @@ export const renderHome = async (req, res) => {
 };
 
 export const renderProducts = async (req, res) => {
-    try {        
+    try {
         const response = await axios.get(`${req.protocol}://${req.get('host')}/api/products`);
         const productsData = response.data;
-        
-        res.render('products', { 
+
+        res.render('products', {
             products: productsData.products,
             pagination: productsData.pagination
         });
@@ -31,5 +32,15 @@ export const renderRegister = async (req, res) => {
 };
 
 export const renderCurrent = async (req, res) => {
-    res.render('current', { user: req.session.user });
+    try {
+        if (!req.session.user) {
+            return res.status(401).json({ error: 'No hay usuario autenticado' });
+        }
+
+        const userDTO = new UserDTO(req.session.user);
+        res.render('current', { user: userDTO });
+    } catch (error) {
+        console.log("No se pudo renderizar la vista current", error);
+        res.status(500).json({ error: 'Error al renderizar la vista current' });
+    }
 };
