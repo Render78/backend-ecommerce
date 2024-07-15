@@ -1,5 +1,5 @@
 // src/repositories/cart.repository.js
-class CartRepository {
+export default class CartRepository {
     createCart() {
         throw new Error("Method not implemented.");
     }
@@ -24,5 +24,3 @@ class CartRepository {
         throw new Error("Method not implemented.");
     }
 }
-
-module.exports = CartRepository;

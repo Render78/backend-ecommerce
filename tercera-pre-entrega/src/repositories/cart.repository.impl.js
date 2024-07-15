@@ -1,6 +1,6 @@
 // src/repositories/cart.repository.impl.js
-const CartRepository = require('./cart.repository');
-const Cart = require('../dao/models/cart.model'); // Ajusta esto a tu ruta y modelo correcto
+import CartRepository from './cart.repository.js';
+import Cart from '../dao/models/cart.model.js';
 
 export default class CartRepositoryImpl extends CartRepository {
     async createCart() {
@@ -58,5 +58,3 @@ export default class CartRepositoryImpl extends CartRepository {
         return await cart.save();
     }
 }
-
-module.exports = CartRepositoryImpl;
