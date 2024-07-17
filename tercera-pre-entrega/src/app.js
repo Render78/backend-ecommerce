@@ -14,6 +14,7 @@ import viewsRouter from './routes/views.router.js'
 import sessionsRouter from './routes/api/sessions.router.js'
 import productsRouter from './routes/product.router.js'
 import cartsRouter from './routes/cart.router.js'
+import ticketRouter from './routes/ticket.router.js'
 
 const app = express()
 const PORT = 8080
@@ -49,6 +50,7 @@ app.use('/', viewsRouter)
 app.use('/api/sessions', sessionsRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
+app.use('/api/tickets', ticketRouter)
 
 
 app.listen(PORT, () => {
