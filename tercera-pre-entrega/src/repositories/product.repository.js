@@ -1,4 +1,3 @@
-// src/repositories/product.repository.js
 export default class ProductRepository {
     create(product) {
         throw new Error("Method not implemented.");

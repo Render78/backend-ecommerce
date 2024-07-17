@@ -1,4 +1,3 @@
-// src/repositories/product.repository.impl.js
 import ProductRepository from './product.repository.js';
 import Product from '../dao/models/product.model.js';
 import mongoose from 'mongoose';

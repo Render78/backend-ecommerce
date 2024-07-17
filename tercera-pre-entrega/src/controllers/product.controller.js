@@ -1,4 +1,3 @@
-// src/controllers/product.controller.js
 import ProductRepositoryImpl from '../repositories/product.repository.impl.js';
 const productRepository = new ProductRepositoryImpl();
 
