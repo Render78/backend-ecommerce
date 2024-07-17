@@ -16,12 +16,19 @@ export const registerUser = async (req, res) => {
 
         const hashedPassword = createHash(password);
 
+        // Asignar rol de 'admin' si el correo termina en '@admin.com'
+        let role = 'user';
+        if (email.endsWith('@admin.com')) {
+            role = 'admin';
+        }
+
         const newUser = {
             first_name,
             last_name,
             email,
             age,
-            password: hashedPassword
+            password: hashedPassword,
+            role
         };
 
         const savedUser = await userRepository.createUser(newUser);

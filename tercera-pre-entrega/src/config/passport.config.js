@@ -1,5 +1,5 @@
 import passport from "passport";
-import local from 'passport-local'
+import local from 'passport-local';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import userModel from '../dao/models/user.model.js';
 import { createHash } from "../utils.js";
@@ -21,15 +21,20 @@ const initializePassport = () => {
                 }
 
                 const hashedPassword = createHash(password);
-                console.log('Contraseña original:', password);
-                console.log('Contraseña hasheada:', hashedPassword);
+
+                // Asignar rol de 'admin' si el correo termina en '@admin.com'
+                let role = 'user';
+                if (email.endsWith('@admin.com')) {
+                    role = 'admin';
+                }
 
                 const newUser = new userModel({
                     first_name,
                     last_name,
                     email,
                     age,
-                    password: hashedPassword
+                    password: hashedPassword,
+                    role
                 });
 
                 let result = await newUser.save();
@@ -92,7 +97,8 @@ const initializePassport = () => {
                         last_name: last_name || 'N/A',
                         email,
                         age: 20,
-                        password: ""
+                        password: "",
+                        role: email.endsWith('@admin.com') ? 'admin' : 'user' // Asignar rol
                     });
 
                     user = await newUser.save();
@@ -123,4 +129,4 @@ const initializePassport = () => {
     });
 }
 
-export default initializePassport
+export default initializePassport;

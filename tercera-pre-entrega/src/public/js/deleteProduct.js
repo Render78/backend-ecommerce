@@ -4,7 +4,7 @@ document.getElementById('deleteProductForm').addEventListener('submit', async fu
     const pid = document.getElementById('pid').value;
 
     try {
-        const response = await fetch(`http://localhost:8080/api/products/delete/${pid}`, {
+        const response = await fetch(`http://localhost:8080/api/products/${pid}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

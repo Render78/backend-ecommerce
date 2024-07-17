@@ -23,6 +23,30 @@ export const renderProducts = async (req, res) => {
     }
 };
 
+export const renderAddProduct = async (req, res) => {
+    try {
+        res.render('addProduct');
+    } catch (error) {
+        console.log("No se pudo renderizar la vista", error);
+    }
+}
+
+export const renderUpdateProduct = async (req, res) => {
+    try {
+        res.render('updateProduct');
+    } catch (error) {
+        console.log("No se pudo renderizar la vista", error);
+    }
+}
+
+export const renderDeleteProduct = async (req, res) => {
+    try {
+        res.render('deleteProduct');
+    } catch (error) {
+        console.log("No se pudo renderizar la vista", error);
+    }
+}
+
 export const renderLogin = async (req, res) => {
     res.render('login');
 };
