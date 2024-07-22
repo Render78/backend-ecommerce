@@ -17,7 +17,7 @@ router.get('/failregister', failRegister);
 router.post('/login', passport.authenticate('login', { failureRedirect: 'faillogin' }), loginUser);
 router.get('/faillogin', failLogin);
 
-router.get("/github", passport.authenticate("github", { scope: ["user:email"] }), async (req, res) => {});
+router.get("/github", passport.authenticate("github", { scope: ["user:email"] }), async (req, res) => { });
 router.get("/githubcallback", passport.authenticate("github", { failureRedirect: "/login" }), githubCallback);
 
 router.post('/logout', logoutUser);

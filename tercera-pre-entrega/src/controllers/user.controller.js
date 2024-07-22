@@ -1,43 +1,44 @@
 import UserRepositoryImpl from '../repositories/user.repository.impl.js';
 import { createHash } from '../utils.js';
 import CartRepositoryImpl from '../repositories/cart.repository.impl.js';
+import axios from 'axios';
 
 const userRepository = new UserRepositoryImpl();
 const cartRepository = new CartRepositoryImpl();
 
 export const registerUser = async (req, res) => {
-    const { first_name, last_name, email, age, password } = req.body;
+    // const { first_name, last_name, email, age, password } = req.body;
 
     try {
-        const existingUser = await userRepository.findUserByEmail(email);
-        if (existingUser) {
-            return res.status(400).json({ error: 'El correo ya está registrado' });
-        }
+        // const existingUser = await userRepository.findUserByEmail(email);
+        // if (existingUser) {
+        //     return res.status(400).json({ error: 'El correo ya está registrado' });
+        // }
 
-        const hashedPassword = createHash(password);
+        // const hashedPassword = createHash(password);
 
-        // Asignar rol de 'admin' si el correo termina en '@admin.com'
-        let role = 'user';
-        if (email.endsWith('@admin.com')) {
-            role = 'admin';
-        }
+        // // Asignar rol de 'admin' si el correo termina en '@admin.com'
+        // let role = 'user';
+        // if (email.endsWith('@admin.com')) {
+        //     role = 'admin';
+        // }
 
-        const newUser = {
-            first_name,
-            last_name,
-            email,
-            age,
-            password: hashedPassword,
-            role
-        };
+        // const newCart = await cartRepository.createCart();
+        // console.log("Nuevo carrito creado:", newCart);
 
-        const savedUser = await userRepository.createUser(newUser);
-        console.log("Nuevo usuario registrado:", savedUser);
+        // const newUser = {
+        //     first_name,
+        //     last_name,
+        //     email,
+        //     age,
+        //     password: hashedPassword,
+        //     role,
+        //     cart: newCart._id
+        // };
 
-        const newCart = await cartRepository.createCart();
-        savedUser.cart = newCart._id;
-        await userRepository.updateUser(savedUser);
-
+        // const savedUser = await userRepository.createUser(newUser);
+        console.log("Nuevo usuario registrado");
+        
         res.status(201).json({ status: "success", message: "Usuario registrado exitosamente" });
     } catch (error) {
         console.error("Error al registrar usuario:", error);
@@ -71,6 +72,7 @@ export const logoutUser = async (req, res) => {
 export const failRegister = async (req, res) => {
     console.log("Estrategia fallida");
     res.send({ error: "Falló" });
+    
 };
 
 export const failLogin = async (req, res) => {

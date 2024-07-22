@@ -4,7 +4,12 @@ import { Strategy as GitHubStrategy } from 'passport-github2';
 import userModel from '../dao/models/user.model.js';
 import { createHash } from "../utils.js";
 import dotenv from 'dotenv';
+import UserRepositoryImpl from "../repositories/user.repository.impl.js";
+import CartRepositoryImpl from '../repositories/cart.repository.impl.js';
 dotenv.config();
+
+const userRepository = new UserRepositoryImpl();
+const cartRepository = new CartRepositoryImpl();
 
 const LocalStrategy = local.Strategy;
 
@@ -14,7 +19,7 @@ const initializePassport = () => {
         async (req, email, password, done) => {
             const { first_name, last_name, age } = req.body;
             try {
-                let user = await userModel.findOne({ email });
+                let user = await userRepository.findUserByEmail(email);
                 if (user) {
                     console.log("El usuario ya existe");
                     return done(null, false);
@@ -22,11 +27,13 @@ const initializePassport = () => {
 
                 const hashedPassword = createHash(password);
 
-                // Asignar rol de 'admin' si el correo termina en '@admin.com'
                 let role = 'user';
                 if (email.endsWith('@admin.com')) {
                     role = 'admin';
                 }
+
+                const newCart = await cartRepository.createCart();
+                console.log("Nuevo carrito creado:", newCart);
 
                 const newUser = new userModel({
                     first_name,
@@ -34,6 +41,7 @@ const initializePassport = () => {
                     email,
                     age,
                     password: hashedPassword,
+                    cart: newCart._id,
                     role
                 });
 

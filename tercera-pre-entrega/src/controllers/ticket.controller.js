@@ -1,4 +1,4 @@
-import TicketRepository from "../repositories/ticket.repository";
+import TicketRepository from "../repositories/ticket.repository.js";
 
 const ticketRepository = new TicketRepository();
 
