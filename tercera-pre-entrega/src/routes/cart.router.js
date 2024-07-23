@@ -5,7 +5,8 @@ import {
     addProductToCart,
     removeProductFromCart,
     updateProductQuantity,
-    clearCart
+    clearCart,
+    purchase
 } from '../controllers/cart.controller.js';
 import { isUser } from '../middleware/auth.js';
 
@@ -17,5 +18,6 @@ router.post('/:cid/product/:pid', isUser, addProductToCart);
 router.delete('/:cid/product/:pid', removeProductFromCart);
 router.put('/:cid/product/:pid', updateProductQuantity);
 router.delete('/:cid', clearCart);
+router.post('/:cid/purchase', purchase);
 
 export default router;

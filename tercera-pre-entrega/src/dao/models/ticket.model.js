@@ -22,12 +22,11 @@ const ticketSchema = new mongoose.Schema({
     }
 })
 
-ticketSchema.pre('save', function(next) {
+ticketSchema.pre('validate', function(next) {
     if (!this.isNew) {
         return next();
     }
 
-    // Generar un código único
     this.code = `TICKET-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
     next();
 });
