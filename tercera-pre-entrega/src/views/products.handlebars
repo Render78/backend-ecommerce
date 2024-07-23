@@ -1,6 +1,7 @@
 <div class="container mt-5">
     <h1 class="mb-4">Lista de Productos</h1>
     <div class="row d-flex">
+        <p>carrito: {{cart}}</p>
         {{#each products}}
         <div class="col-md-4 mb-4 d-flex align-items-stretch">
             <div class="card h-100">
@@ -13,8 +14,12 @@
                             <p class="card-text">{{description}}</p>
                             <p class="card-text mt-auto"><strong>Precio: </strong>${{price}}</p>
                             <a href="/api/products/get/{{_id}}" class="btn btn-primary mt-auto">Ver más</a>
-                            <button class="btn btn-success mt-2" onclick="addToCart('{{_id}}')">Agregar al
-                                carrito</button>
+                            <form method="POST" action="/api/carts/{{../cart}}/product/{{_id}}">
+                                <button class="btn btn-success mt-2">Agregar al
+                                    carrito</button>
+                            </form>
+                            
+
                 </div>
             </div>
         </div>

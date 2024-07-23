@@ -14,9 +14,14 @@ export const renderProducts = async (req, res) => {
         const response = await axios.get(`${req.protocol}://${req.get('host')}/api/products`);
         const productsData = response.data;
 
+        let user = req.session.user;
+        console.log(user);
+
+
         res.render('products', {
             products: productsData.products,
-            pagination: productsData.pagination
+            pagination: productsData.pagination,
+            cart: user.cart
         });
     } catch (error) {
         console.log("No se pudo renderizar la vista de productos", error);
