@@ -4,19 +4,20 @@ import { sendResetPasswordEmail } from '../utils/mailer.js';
 import User from '../dao/models/user.model.js';
 import bcrypt from 'bcryptjs';
 import logger from '../utils/logger.js';
+import UserDTO from '../dao/dtos/user.dto.js';
 
 const userRepository = new UserRepositoryImpl();
 
 export const toggleUserRole = async (req, res) => {
     try {
         const { uid } = req.params;
-        
+
         const user = await userRepository.findById(uid);
 
         if (!user) {
             return res.status(404).json({ status: 'error', message: 'Usuario no encontrado' });
         }
-        
+
         const requiredDocuments = ['identificacion', 'comprobante de domicilio', 'comprobante de estado de cuenta'];
 
         const hasAllDocuments = requiredDocuments.every(docName =>
@@ -29,7 +30,7 @@ export const toggleUserRole = async (req, res) => {
                 message: 'No se puede cambiar el rol a premium. Faltan documentos requeridos: identificación, comprobante de domicilio y/o comprobante de estado de cuenta.'
             });
         }
-        
+
         user.role = user.role === 'premium' ? 'user' : 'premium';
         await user.save();
 
@@ -138,5 +139,23 @@ export const uploadDocuments = async (req, res) => {
         res.json({ mensaje: "Archivos subidos y documentos actualizados", documents: user.documents });
     } catch (error) {
         res.status(500).json({ mensaje: "Error al actualizar los documentos del usuario", error: error.message });
+    }
+};
+
+export const getUsers = async (req, res) => {
+    try {
+        const users = await userRepository.getUsers();
+        if (!users) {
+            return res.status(404).json({ status: 'error', message: 'No se encontraron usuarios' });
+        }
+        
+        const usersDTO = users.map(user => {
+            const { first_name, last_name, email, role } = new UserDTO(user);
+            return { first_name, last_name, email, role };
+        });
+        
+        res.status(200).json(usersDTO);
+    } catch (error) {
+        res.status(500).json({ status: 'error', message: 'Error interno del servidor' });
     }
 };

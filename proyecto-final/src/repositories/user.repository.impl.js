@@ -23,6 +23,16 @@ export default class UserRepositoryImpl extends UserRepository {
         }
     }
 
+    async getUsers() {
+        try {
+            const users = await UserModel.find();
+            return users;
+        } catch (error) {
+            console.error('Error al obtener los usuarios:', error);
+            throw error;
+        }
+    }
+
     async createUser(user) {
         try {
             const newUser = new UserModel(user);
