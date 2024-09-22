@@ -148,14 +148,29 @@ export const getUsers = async (req, res) => {
         if (!users) {
             return res.status(404).json({ status: 'error', message: 'No se encontraron usuarios' });
         }
-        
+
         const usersDTO = users.map(user => {
             const { first_name, last_name, email, role } = new UserDTO(user);
             return { first_name, last_name, email, role };
         });
-        
+
         res.status(200).json(usersDTO);
     } catch (error) {
         res.status(500).json({ status: 'error', message: 'Error interno del servidor' });
+    }
+};
+
+export const deleteInactiveUsers = async (req, res) => {
+    try {
+        const result = await userRepository.deleteInactiveUsers();
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ status: 'error', message: 'No se encontraron usuarios inactivos.' });
+        }
+
+        res.status(200).json({ status: 'success', message: `${result.deletedCount} usuarios eliminados por inactividad.` });
+    } catch (error) {
+        res.status(500).json({ status: 'error', message: 'Error interno del servidor.' });
+        console.log(error);
     }
 };

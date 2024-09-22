@@ -37,3 +37,27 @@ export const sendResetPasswordEmail = async (email, token) => {
         throw error;
     }
 };
+
+export const sendAccountDeletionEmail = async (email) => {
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: 'Eliminación de cuenta',
+        html: `
+            <h2>Notificación de Eliminación de Cuenta</h2>
+            <p>Estimado usuario,</p>
+            <p>Su cuenta ha sido eliminada debido a inactividad durante los últimos 2 días.</p>
+            <p>Si considera que esto es un error, por favor contáctenos.</p>
+            <p>Gracias por su comprensión.</p>
+        `
+    };
+
+    try {
+        logger.debug(`Enviando correo de eliminación de cuenta a ${email}`);
+        await transporter.sendMail(mailOptions);
+        logger.info(`Correo de eliminación de cuenta enviado a ${email}`);
+    } catch (error) {
+        logger.error(`Error al enviar correo a ${email}: ${error.message}`);
+        throw error;
+    }
+};

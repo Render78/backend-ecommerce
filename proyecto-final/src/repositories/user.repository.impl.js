@@ -1,8 +1,9 @@
 import UserRepository from './user.repository.js';
 import UserModel from '../dao/models/user.model.js';
+import { sendAccountDeletionEmail } from '../utils/mailer.js';
 
 export default class UserRepositoryImpl extends UserRepository {
-    
+
     async findById(uid) {
         try {
             const user = await UserModel.findById(uid);
@@ -51,6 +52,28 @@ export default class UserRepositoryImpl extends UserRepository {
             console.log(`Usuario actualizado: ${user}`);
         } catch (error) {
             console.error('Error en updateUser:', error);
+            throw error;
+        }
+    }
+
+    async deleteInactiveUsers() {
+        const twoDaysAgo = new Date();
+        twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+
+        try {
+            const inactiveUsers = await UserModel.find({ last_connection: { $lt: twoDaysAgo } });
+
+            const result = await UserModel.deleteMany({ last_connection: { $lt: twoDaysAgo } });
+
+            console.log(`${result.deletedCount} usuarios eliminados por inactividad.`);
+
+            for (const user of inactiveUsers) {
+                await sendAccountDeletionEmail(user.email);
+            }
+
+            return result;
+        } catch (error) {
+            console.error('Error al eliminar usuarios inactivos:', error);
             throw error;
         }
     }
