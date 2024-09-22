@@ -1,0 +1,55 @@
+<div class="container mt-5">
+    <h2>Actualizar Producto</h2>
+    <form id="updateProductForm">
+        <div class="form-group">
+            <label for="pid">ID del Producto</label>
+            <input type="text" class="form-control" id="pid" name="pid" required>
+        </div>
+        <div class="form-group">
+            <label for="title">Título</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Descripción</label>
+            <input type="text" class="form-control" id="description" name="description" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Categoría</label>
+            <select class="form-control" id="category" name="category" required>
+                <option value="" selected disabled>Seleccione una categoría</option>
+                <option value="Computadoras">Computadoras</option>
+                <option value="Telefonos">Telefonos</option>
+                <option value="Televisores">Televisores</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="Consolas">Consolas</option>
+                <option value="Videojuegos">Videojuegos</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Precio</label>
+            <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+        </div>
+        <div class="form-group">
+            <label for="thumbnail">Thumbnail</label>
+            <input type="text" class="form-control" id="thumbnail" name="thumbnail" required>
+        </div>
+        <div class="form-group">
+            <label for="code">Código</label>
+            <input type="text" class="form-control" id="code" name="code" required>
+        </div>
+        <div class="form-group">
+            <label for="stock">Stock</label>
+            <input type="number" class="form-control" id="stock" name="stock" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Estado</label>
+            <select class="form-control" id="status" name="status" required>
+                <option value="true">Activo</option>
+                <option value="false">Inactivo</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Actualizar producto</button>
+    </form>
+</div>
+
+<script src="/js/updateProduct.js"></script>

@@ -1,0 +1,147 @@
+paths:
+  /api/products/:
+    get:
+      summary: Obtiene todos los productos de la DB
+      tags:
+        - Products
+      responses:
+        "200":
+          description: "Productos obtenidos satisfactoriamente"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "500":
+          description: Error interno del servidor
+    /api/products/:
+    post:
+      summary: Agrega un nuevo producto
+      tags:
+        - Products
+      requestBody:
+        description: Datos del nuevo producto a agregar
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: "Producto creado satisfactoriamente"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "403":
+          description: "Acceso denegado. Solo administradores y usuarios premium pueden agregar productos"
+        "500":
+          description: Error interno del servidor
+
+  /api/products/{pid}:
+    /api/products/{pid}:
+    get:
+      summary: Obtiene un producto específico por ID
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del producto
+      responses:
+        "200":
+          description: "Producto obtenido satisfactoriamente"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "500":
+          description: Error interno del servidor
+
+    put:
+      summary: Actualiza un producto por ID
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del producto a actualizar
+      requestBody:
+        description: Datos del producto a actualizar
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: "Producto actualizado satisfactoriamente"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "403":
+          description: "Acceso denegado. Solo administradores pueden actualizar productos"
+        "500":
+          description: Error interno del servidor
+
+    delete:
+      summary: Elimina un producto por ID
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del producto a eliminar
+      responses:
+        "200":
+          description: "Producto eliminado satisfactoriamente"
+        "403":
+          description: "Acceso denegado. Solo administradores y usuarios premium pueden eliminar productos"
+        "500":
+          description: Error interno del servidor
+
+
+     
+
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        description:
+          type: string          
+          description: Breve descripcion del producto
+        category:
+          type: string          
+          description: Categoría correspondiente del producto
+        price:
+          type: number          
+          description: Precio unitario del producto
+        thumbnail:
+          type: string
+          description: URL hacia la imagen del producto
+        code:
+          type: string
+          description: Código único para el producto
+        stock:
+          type: number
+          description: Unidades en stock actualizadas del producto
+        status:
+          type: boolean
+          description: Estado actual del producto (activo o no)
+        owner:
+          type: string
+          description: Rol de la persona que registró el producto en la DB
+        

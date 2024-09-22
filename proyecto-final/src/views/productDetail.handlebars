@@ -1,0 +1,22 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card text-center">
+                <img src="{{product.thumbnail}}" class="card-img-top" alt="{{product.title}}">
+                <div class="card-body">
+                    <h4 class="card-title">{{product.title}}</h4>
+                    <h5 class="card-subtitle">{{product.category}}</h5>
+                    <p class="card-text">{{product.description}}</p>
+                    <p class="card-text"><strong>Precio:</strong> ${{product.price}}</p>
+                    <p class="card-text"><strong>ID:</strong> {{product.id}}</p>
+                    <p class="card-text"><strong>Stock:</strong> {{product.stock}}</p>
+                    <a href="/products" class="btn btn-primary w-100 mb-2">Volver atrás</a>
+                    <form method="POST" action="/api/carts/{{../cart}}/product/{{_id}}">
+                        <button class="btn btn-success mt-2">Agregar al
+                            carrito</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
