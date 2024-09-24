@@ -78,6 +78,10 @@ export default class UserRepositoryImpl extends UserRepository {
         }
     }
 
+    async delete(userId) {
+        return await UserModel.findByIdAndDelete(userId);
+    }
+
     async toggleUserRole(userId) {
         try {
             const user = await UserModel.findById(userId);

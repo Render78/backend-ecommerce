@@ -1,0 +1,78 @@
+<div class="container mt-5"></div>
+<h2>Gestión de Usuarios</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each users}}
+        <tr>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.role}}</td>
+            <td>
+                <button class="btn btn-primary btn-sm" onclick="changeRol('{{this._id}}')">Cambiar
+                    Rol</button>
+                <button class="btn btn-danger btn-sm" onClick="deleteUser('{{this._id}}')">Eliminar usuario</button>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</div>
+
+<script>
+    function changeRol(userId) {
+        fetch(`http://localhost:8080/api/users/premium/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Rol cambiado correctamente');
+                    location.reload();
+                } else {
+                    alert('No se puede cambiar de rol al usuario, no presentó la documentación correspondiente.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    async function deleteUser(userId) {
+        const confirmation = confirm('¿Estás seguro de que deseas eliminar este usuario?');
+        if (!confirmation) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                alert('Usuario eliminado exitosamente.');
+                window.location.reload();
+            } else {
+                const data = await response.json();
+                alert(`Error al eliminar usuario: ${data.message || 'Error desconocido'}`);
+                console.log(data);
+            }
+        } catch (error) {
+            console.log('Error al eliminar usuario:', error);
+            alert('Ocurrió un error al intentar eliminar al usuario.');
+        }
+    }
+</script>

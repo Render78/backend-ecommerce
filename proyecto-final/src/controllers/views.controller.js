@@ -1,6 +1,9 @@
 import axios from 'axios'
 import UserDTO from '../dao/dtos/user.dto.js';
 import logger from '../utils/logger.js'
+import UserRepositoryImpl from '../repositories/user.repository.impl.js';
+
+let userRepository = new UserRepositoryImpl();
 
 export const renderHome = async (req, res) => {
     try {
@@ -110,3 +113,14 @@ export const renderResetPassword = async (req, res) => {
         res.status(500).json({ error: 'Error al renderizar la vista' });
     }
 }
+
+export const renderUserManagement = async (req, res) => {
+    try {
+        const response = await axios.get('http://localhost:8080/api/users');
+        const users = response.data;
+        res.render('getUsers', { users });
+    } catch (error) {
+        res.status(500).send('Error al obtener usuarios.');
+        console.log(error);
+    }
+};

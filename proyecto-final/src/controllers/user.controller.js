@@ -150,8 +150,8 @@ export const getUsers = async (req, res) => {
         }
 
         const usersDTO = users.map(user => {
-            const { first_name, last_name, email, role } = new UserDTO(user);
-            return { first_name, last_name, email, role };
+            const { _id, first_name, last_name, email, role } = new UserDTO(user);
+            return { _id, first_name, last_name, email, role };
         });
 
         res.status(200).json(usersDTO);
@@ -171,6 +171,24 @@ export const deleteInactiveUsers = async (req, res) => {
         res.status(200).json({ status: 'success', message: `${result.deletedCount} usuarios eliminados por inactividad.` });
     } catch (error) {
         res.status(500).json({ status: 'error', message: 'Error interno del servidor.' });
+        console.log(error);
+    }
+};
+
+export const deleteUser = async (req, res) => {
+    const { uid } = req.params;
+
+    try {
+        const user = await userRepository.findById(uid);
+        if (!user) {
+            return res.status(404).json({ status: 'error', message: 'Usuario no encontrado' });
+        }
+
+        await userRepository.delete(uid);
+
+        res.status(200).json({ status: 'success', message: 'Usuario eliminado correctamente' });
+    } catch (error) {
+        res.status(500).json({ status: 'error', message: 'Error al eliminar el usuario' });
         console.log(error);
     }
 };

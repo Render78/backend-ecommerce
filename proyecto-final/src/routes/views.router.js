@@ -11,7 +11,8 @@ import {
     renderDeleteProduct,
     renderForgotPassword,
     renderResetPassword,
-    renderProductDetail
+    renderProductDetail,
+    renderUserManagement
 } from '../controllers/views.controller.js';
 
 const router = Router();
@@ -27,5 +28,6 @@ router.get('/register', isNotAuthenticated, renderRegister);
 router.get('/current', isAuthenticated, renderCurrent);
 router.get('/forgotPassword', isNotAuthenticated, renderForgotPassword);
 router.get('/reset-password/:token', isNotAuthenticated, renderResetPassword);
+router.get('/users', isAuthenticated, checkRoles('admin'), renderUserManagement);
 
 export default router;
