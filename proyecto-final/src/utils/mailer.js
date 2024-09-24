@@ -61,3 +61,20 @@ export const sendAccountDeletionEmail = async (email) => {
         throw error;
     }
 };
+
+export const sendEmail = async (email, subject, htmlContent) => {
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject,
+        html: htmlContent
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        logger.info(`Correo enviado a ${email} con asunto: ${subject}`);
+    } catch (error) {
+        logger.error(`Error al enviar correo a ${email}: ${error.message}`);
+        throw error;
+    }
+};

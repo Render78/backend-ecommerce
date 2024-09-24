@@ -2,6 +2,8 @@ import ProductRepositoryImpl from '../repositories/product.repository.impl.js';
 import { generateProductErrorInfo } from '../services/info.js';
 import CustomError from "../services/CustomError.js";
 import EErrors from "../services/enum.js";
+import logger from '../utils/logger.js';
+import { sendEmail } from '../utils/mailer.js';
 
 const productRepository = new ProductRepositoryImpl();
 
@@ -149,6 +151,20 @@ export const deleteProduct = async (req, res) => {
 
     if (!deletedProduct) {
       return res.status(404).json({ status: "error", error: "Producto no encontrado" });
+    }
+
+    if (product.owner !== 'admin') {
+      const ownerEmail = product.owner;
+      const emailContent = `
+        <h2>Producto Eliminado</h2>
+        <p>Estimado usuario premium, su producto <strong>${product.title}</strong> ha sido eliminado del sistema.</p>
+      `;
+
+      try {
+        await sendEmail(ownerEmail, 'Producto Eliminado', emailContent);
+      } catch (error) {
+        logger.error(`Error al enviar correo de notificación: ${error.message}`);
+      }
     }
 
     res.status(200).json({ status: "success", message: "Producto eliminado exitosamente" });
