@@ -124,3 +124,17 @@ export const renderUserManagement = async (req, res) => {
         console.log(error);
     }
 };
+
+export const renderCart = async (req, res) => {
+    try {
+        const { cid } = req.params;
+        const response = await axios.get(`http://localhost:8080/api/carts/${cid}`);
+        const cart = response.data;
+
+        res.render('cart', { cart });
+    } catch (error) {
+        console.error(`Error al renderizar el carrito: ${error.message}`);
+        res.status(500).render('error', { message: 'Error al cargar el carrito.' });
+        console.log(error);
+    }
+}
